@@ -8,7 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ViewController : NSViewController
+@interface ViewController : NSViewController {
+    BOOL _hello;
+}
 
 
 @end
