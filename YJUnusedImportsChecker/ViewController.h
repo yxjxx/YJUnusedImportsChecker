@@ -8,10 +8,21 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ViewController : NSViewController {
-    BOOL _hello;
-}
+@interface ViewController : NSViewController
 
+@property (weak) IBOutlet NSTextField *dotXcworkspacePathTextField;
+
+@property (weak) IBOutlet NSTextField *toCheckFolderPathTextField;
+
+@property (weak) IBOutlet NSTextField *symrootTextField;
+
+@property (weak) IBOutlet NSTextField *handlingFilenameLabel;
+
+- (IBAction)dotXcworkspacePathBrowserBtn:(id)sender;
+
+- (IBAction)toCheckFolderBrowserBtn:(id)sender;
+
+- (IBAction)symrootPathBrowserBtn:(id)sender;
 
 @end
 

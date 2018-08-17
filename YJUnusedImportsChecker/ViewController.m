@@ -20,6 +20,10 @@
     [super viewDidLoad];
 
     // Do any additional setup after loading the view.
+    self.dotXcworkspacePathTextField.editable = NO;
+    self.toCheckFolderPathTextField.editable = NO;
+    self.symrootTextField.editable = NO;
+    self.handlingFilenameLabel.editable = NO;
 }
 
 - (void)handleOneFile:(NSString *)filePath {
@@ -89,13 +93,25 @@
 - (IBAction)findBtnClicked:(id)sender {
     [self.progressIndicator startAnimation:self];
 //    NSString *folderPath = @"/Users/yxj/Desktop/NewCarpool/CarpoolBusiness/Pod/Classes/Kit/DCFundationKit/Component/OrderList/ShoppingCart/view/";
-    NSString *folderPath = @"/Users/yxj/Desktop/20180511Blord/CarpoolBusiness/Pod/Classes/Business/Mine/Header/actions/";
-    NSArray *suffixs = @[@"h", @"m"];
+    NSString *folderPath =self.toCheckFolderPathTextField.stringValue;
+    //@"/Users/yxj/Desktop/20180511Blord/CarpoolBusiness/Pod/Classes/Business/Mine/Header/actions/";
+    if (![folderPath stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length) {
+        [self showAlertWithStyle:NSAlertStyleWarning title:@"请选择要检查的文件夹" subtitle:@"比如：/Users/yxj/Desktop/20180511Blord/CarpoolBusiness/Pod/Classes/Business/Mine"];
+        return;
+    }
+    NSString *workspace = self.dotXcworkspacePathTextField.stringValue;
+    if (![workspace hasSuffix:@".xcworkspace"]) {
+//        [self showAlertWithStyle:NSAlertStyleInformational title:@"选择正确的 .xcworkspac 文件" subtitle:@"比如：/Users/yxj/Desktop/20180511Blord/OneTravel.xcworkspace"];
+//        return;
+    }
+    NSArray *suffixs = @[@"h", @"m", @"mm"];
     NSArray *pathList = [self resourceFilesInDirectory:folderPath excludeFolders:nil resourceSuffixs:suffixs];
     for (NSString *filePath in pathList) {
+        self.handlingFilenameLabel.stringValue = [NSString stringWithFormat:@"Handling %@...", filePath];
         [self handleOneFile:filePath];
     }
     [self.progressIndicator stopAnimation:self];
+    self.handlingFilenameLabel.stringValue = @"Finished.";
     
     //读取所有的文件列表
     //读取所有自定义类存到一个集合里（把文件列表中后缀为 .h 的取出来)
@@ -105,10 +121,17 @@
     //xcodebuild -workspace /Users/yxj/Desktop/NewCarpool/OneTravel.xcworkspace -configuration Debug -scheme OneTravel SYMROOT="/Users/yxj/Desktop/UnusedImport" build
     NSInteger start = [self p_currentTime];
     NSInteger end;
-    NSString *workspace = @"/Users/yxj/Desktop/20180511Blord/OneTravel.xcworkspace";
+    NSString *workspace = self.dotXcworkspacePathTextField.stringValue;
+    if (!workspace.length) {
+        workspace = @"/Users/yxj/Desktop/20180511Blord/OneTravel.xcworkspace";
+    }
+    
     NSString *configuration = @"Debug";
     NSString *scheme = @"OneTravel";
     NSString *symroot = @"SYMROOT=/Users/yxj/Desktop/UnusedImport";
+    if (self.symrootTextField.stringValue.length) {
+        symroot = [NSString stringWithFormat:@"SYMROOT=%@/UnusedImportCheckOutput", self.symrootTextField.stringValue];
+    }
     NSTask *task = [[NSTask alloc] init];
     [task setLaunchPath: @"/usr/bin/xcodebuild"];
     NSMutableArray *argvals = [NSMutableArray array];
@@ -199,5 +222,59 @@
     }
     return nil;
 }
+
+- (void)showAlertWithStyle:(NSAlertStyle)style title:(NSString *)title subtitle:(NSString *)subtitle {
+    NSAlert *alert = [[NSAlert alloc] init];
+    alert.alertStyle = style;
+    [alert setMessageText:title];
+    [alert setInformativeText:subtitle];
+    [alert runModal];
+}
+
+#pragma mark - storyboard
+- (IBAction)dotXcworkspacePathBrowserBtn:(id)sender {
+    // Show an open panel
+    NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+    [openPanel setCanChooseDirectories:NO];
+    [openPanel setCanChooseFiles:YES];
+    openPanel.allowsMultipleSelection = NO;
+    openPanel.allowedFileTypes = @[@"xcworkspace"];
+    
+    BOOL okButtonPressed = ([openPanel runModal] == NSModalResponseOK);
+    if (okButtonPressed) {
+        // Update the path text field
+        NSString *path = [[openPanel URL] path];
+        [self.dotXcworkspacePathTextField setStringValue:path];
+    }
+}
+
+- (IBAction)toCheckFolderBrowserBtn:(id)sender {
+    NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+    [openPanel setCanChooseDirectories:YES];
+    [openPanel setCanChooseFiles:NO];
+    openPanel.allowsMultipleSelection = NO;
+    
+    BOOL okButtonPressed = ([openPanel runModal] == NSModalResponseOK);
+    if (okButtonPressed) {
+        // Update the path text field
+        NSString *path = [[openPanel URL] path];
+        [self.toCheckFolderPathTextField setStringValue:path];
+    }
+}
+
+- (IBAction)symrootPathBrowserBtn:(id)sender {
+    NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+    [openPanel setCanChooseDirectories:YES];
+    [openPanel setCanChooseFiles:NO];
+    openPanel.allowsMultipleSelection = NO;
+    
+    BOOL okButtonPressed = ([openPanel runModal] == NSModalResponseOK);
+    if (okButtonPressed) {
+        // Update the path text field
+        NSString *path = [[openPanel URL] path];
+        [self.symrootTextField setStringValue:path];
+    }
+}
+
 
 @end
