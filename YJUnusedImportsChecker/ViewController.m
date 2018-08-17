@@ -89,7 +89,7 @@
 - (IBAction)findBtnClicked:(id)sender {
     [self.progressIndicator startAnimation:self];
 //    NSString *folderPath = @"/Users/yxj/Desktop/NewCarpool/CarpoolBusiness/Pod/Classes/Kit/DCFundationKit/Component/OrderList/ShoppingCart/view/";
-    NSString *folderPath = @"/Users/yxj/Desktop/NewCarpool/CarpoolBusiness/Pod/Classes/Trade/Home/Service/DrivingSafety/";
+    NSString *folderPath = @"/Users/yxj/Desktop/20180511Blord/CarpoolBusiness/Pod/Classes/Business/Mine/Header/actions/";
     NSArray *suffixs = @[@"h", @"m"];
     NSArray *pathList = [self resourceFilesInDirectory:folderPath excludeFolders:nil resourceSuffixs:suffixs];
     for (NSString *filePath in pathList) {
@@ -105,7 +105,7 @@
     //xcodebuild -workspace /Users/yxj/Desktop/NewCarpool/OneTravel.xcworkspace -configuration Debug -scheme OneTravel SYMROOT="/Users/yxj/Desktop/UnusedImport" build
     NSInteger start = [self p_currentTime];
     NSInteger end;
-    NSString *workspace = @"/Users/yxj/Desktop/NewCarpool/OneTravel.xcworkspace";
+    NSString *workspace = @"/Users/yxj/Desktop/20180511Blord/OneTravel.xcworkspace";
     NSString *configuration = @"Debug";
     NSString *scheme = @"OneTravel";
     NSString *symroot = @"SYMROOT=/Users/yxj/Desktop/UnusedImport";
@@ -135,11 +135,11 @@
     NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     if ([string containsString:@"BUILD SUCCEEDED"]) {
         end = [self p_currentTime];
-        NSLog(@"BUILD SUCCEEDED : %ld", end-start);
+        NSLog(@"BUILD SUCCEEDED : %lds", end-start);
         return YES;
     } else {
         end = [self p_currentTime];
-        NSLog(@"BUILD FAILED: %ld", end - start);
+        NSLog(@"BUILD FAILED: %lds", end - start);
         return NO;
     }
 }
