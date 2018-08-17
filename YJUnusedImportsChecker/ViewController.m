@@ -36,12 +36,15 @@
     NSMutableArray *mutableLines = [lines mutableCopy];
     [lines enumerateObjectsUsingBlock:^(NSString* line, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([self isImportLine:line]) {
-            NSString *str = [NSString stringWithFormat:@"//RICO COMMET %@", line];
+            NSString *str = [NSString stringWithFormat:@"//RICO TRY TO COMMET %@", line];//写入正常尝试注释的标记，如果程序异常中断，可能会遗留这个标记
             [mutableLines replaceObjectAtIndex:idx withObject:str];//注释掉
             [self writeBackToFile:mutableLines atPath:filePath];//写回
             BOOL buildSuccess = [self canXcodeProjBuildSuccess];//编译
-            if (buildSuccess) {//如果编译通过，什么都不用做
-                //do nothing
+            if (buildSuccess) {//如果编译通过, 写入注释成功的标记
+                NSString *commetedSuccessStr = [NSString stringWithFormat:@"//RICO COMMET SUCCESS %@", line];
+                [mutableLines replaceObjectAtIndex:idx withObject:commetedSuccessStr];
+                [self writeBackToFile:mutableLines atPath:filePath];//写回
+
             } else {//如果编译失败
                 [mutableLines replaceObjectAtIndex:idx withObject:line];//去掉注释写回，进行下一行
                 [self writeBackToFile:mutableLines atPath:filePath];
@@ -118,7 +121,7 @@
 }
 
 - (BOOL)canXcodeProjBuildSuccess {
-    //xcodebuild -workspace /Users/yxj/Desktop/NewCarpool/OneTravel.xcworkspace -configuration Debug -scheme OneTravel SYMROOT="/Users/yxj/Desktop/UnusedImport" build
+    //xcodebuild -workspace /Users/yxj/Desktop/20180511Blord/OneTravel.xcworkspace -configuration Debug -scheme OneTravel SYMROOT="/Users/yxj/Desktop/UnusedImport" GCC_PREPROCESSOR_DEFINITIONS='$GCC_PREPROCESSOR_DEFINITIONS API_TYPE=1' build
     NSInteger start = [self p_currentTime];
     NSInteger end;
     NSString *workspace = self.dotXcworkspacePathTextField.stringValue;
@@ -128,7 +131,7 @@
     
     NSString *configuration = @"Debug";
     NSString *scheme = @"OneTravel";
-    NSString *symroot = @"SYMROOT=/Users/yxj/Desktop/UnusedImport";
+    NSString *symroot = @"SYMROOT=/Users/yxj/Desktop/UnusedImportCheckOutput";
     if (self.symrootTextField.stringValue.length) {
         symroot = [NSString stringWithFormat:@"SYMROOT=%@/UnusedImportCheckOutput", self.symrootTextField.stringValue];
     }
@@ -143,6 +146,8 @@
     [argvals addObject:scheme];
     [argvals addObject:symroot];
     [argvals addObject:@"build"];
+    NSString *pchMacor = @"GCC_PREPROCESSOR_DEFINITIONS='$GCC_PREPROCESSOR_DEFINITIONS DCARPOOL_IS_PSG=1 DCARPOOL_IS_BLORD=1'";
+    [argvals addObject:pchMacor];
     
     [task setArguments: argvals];
     
