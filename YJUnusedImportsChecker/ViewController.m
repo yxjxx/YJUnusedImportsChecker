@@ -116,8 +116,10 @@
             });
             [self handleOneFile:filePath];
         }
-        [self.progressIndicator stopAnimation:self];
-        self.handlingFilenameLabel.stringValue = @"Finished.";
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.progressIndicator stopAnimation:self];
+            self.handlingFilenameLabel.stringValue = @"Finished.";
+        });
     });
     
     //读取所有的文件列表
