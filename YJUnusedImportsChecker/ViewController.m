@@ -109,12 +109,16 @@
     }
     NSArray *suffixs = @[@"h", @"m", @"mm"];
     NSArray *pathList = [self resourceFilesInDirectory:folderPath excludeFolders:nil resourceSuffixs:suffixs];
-    for (NSString *filePath in pathList) {
-        self.handlingFilenameLabel.stringValue = [NSString stringWithFormat:@"Handling %@...", filePath];
-        [self handleOneFile:filePath];
-    }
-    [self.progressIndicator stopAnimation:self];
-    self.handlingFilenameLabel.stringValue = @"Finished.";
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        for (NSString *filePath in pathList) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.handlingFilenameLabel.stringValue = [NSString stringWithFormat:@"Handling %@", filePath];
+            });
+            [self handleOneFile:filePath];
+        }
+        [self.progressIndicator stopAnimation:self];
+        self.handlingFilenameLabel.stringValue = @"Finished.";
+    });
     
     //读取所有的文件列表
     //读取所有自定义类存到一个集合里（把文件列表中后缀为 .h 的取出来)

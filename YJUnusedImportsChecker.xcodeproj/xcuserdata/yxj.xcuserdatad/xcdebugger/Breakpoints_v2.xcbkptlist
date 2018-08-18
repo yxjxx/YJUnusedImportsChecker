@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YJUnusedImportsChecker/ViewController.m"
-            timestampString = "556212289.268998"
+            timestampString = "556260696.9356951"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "37"
@@ -73,27 +73,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YJUnusedImportsChecker/ViewController.m"
-            timestampString = "556212289.269551"
+            timestampString = "556260696.935877"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
-            landmarkName = "-findBtnClicked:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "YJUnusedImportsChecker/ViewController.m"
-            timestampString = "556212289.270944"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "253"
-            endingLineNumber = "253"
+            startingLineNumber = "256"
+            endingLineNumber = "256"
             landmarkName = "-dotXcworkspacePathBrowserBtn:"
             landmarkType = "7">
          </BreakpointContent>
@@ -105,11 +89,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YJUnusedImportsChecker/ViewController.m"
-            timestampString = "556212289.271435"
+            timestampString = "556260696.935966"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "281"
-            endingLineNumber = "281"
+            startingLineNumber = "284"
+            endingLineNumber = "284"
             landmarkName = "-symrootPathBrowserBtn:"
             landmarkType = "7">
          </BreakpointContent>
@@ -121,11 +105,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YJUnusedImportsChecker/ViewController.m"
-            timestampString = "556212289.271791"
+            timestampString = "556260696.93604"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "267"
-            endingLineNumber = "267"
+            startingLineNumber = "270"
+            endingLineNumber = "270"
             landmarkName = "-toCheckFolderBrowserBtn:"
             landmarkType = "7">
          </BreakpointContent>
@@ -137,11 +121,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YJUnusedImportsChecker/ViewController.m"
-            timestampString = "556212289.272137"
+            timestampString = "556260696.936112"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
             landmarkName = "-canXcodeProjBuildSuccess"
             landmarkType = "7">
          </BreakpointContent>
@@ -153,7 +137,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YJUnusedImportsChecker/ViewController.m"
-            timestampString = "556212289.272437"
+            timestampString = "556260696.936182"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "97"
@@ -169,11 +153,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YJUnusedImportsChecker/ViewController.m"
-            timestampString = "556212289.272722"
+            timestampString = "556260696.93625"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "-canXcodeProjBuildSuccess"
             landmarkType = "7">
          </BreakpointContent>
@@ -185,7 +169,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YJUnusedImportsChecker/ViewController.m"
-            timestampString = "556212289.272984"
+            timestampString = "556260696.936308"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "30"
@@ -201,7 +185,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YJUnusedImportsChecker/ViewController.m"
-            timestampString = "556212289.2732511"
+            timestampString = "556260696.9363641"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "42"
